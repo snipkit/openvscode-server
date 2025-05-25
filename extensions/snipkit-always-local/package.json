@@ -1,0 +1,85 @@
+{
+  "name": "snipkit-always-local",
+  "description": "Implements experimentation features for snipkit",
+  "author": "Khulnasoft, Ltd.",
+  "publisher": "snipkit",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snipkit/openvscode-server"
+  },
+  "extensionKind": [
+    "ui"
+  ],
+  "engines": {
+    "vscode": "^1.43.0",
+    "yarn": "please-use-npm"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onResolveRemoteAuthority:background-composer"
+  ],
+  "enabledApiProposals": [
+    "snipkit",
+    "control",
+    "externalUriOpener",
+    "contribSourceControlInputBoxMenu",
+    "resolvers"
+  ],
+  "main": "./dist/main",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rcp-server.showStatus",
+        "title": "Show RCP Server Status"
+      },
+      {
+        "command": "rcp-server.restart",
+        "title": "Restart RCP Server"
+      },
+      {
+        "command": "rcp-server.enable",
+        "title": "Enable RCP Server"
+      },
+      {
+        "command": "rcp-server.disable",
+        "title": "Disable RCP Server"
+      }
+    ],
+    "keybindings": [],
+    "menus": {
+      "scm/inputBox": [
+        {
+          "command": "snipkit.generateGitCommitMessage",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": ".snipkit/environment.jsonc",
+        "url": "https://snipkit.khulnasoft.com/schemas/environment.schema.json"
+      }
+    ],
+    "resourceLabelFormatters": [
+      {
+        "scheme": "vscode-remote",
+        "authority": "background-composer+*",
+        "formatting": {
+          "label": "${path}",
+          "separator": "/",
+          "tildify": true,
+          "workspaceSuffix": "background-agent"
+        }
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Snipkit Always Local"
+    }
+  },
+  "optionalDependencies": {
+    "@vscode/windows-ca-certs": "^0.3.3"
+  }
+}
